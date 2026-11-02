@@ -8,6 +8,7 @@ on:
       - '*.gradle'
       - 'gradle/**'
       - 'gradlew'
+      - '*.zip'
       - '.github/workflows/android-build.yml'
 
 permissions:
@@ -19,6 +20,14 @@ jobs:
     steps:
       - name: Check out source
         uses: actions/checkout@v4
+
+      - name: Extract supplied AFRO CITY RP source archive
+        run: |
+          if [ ! -f settings.gradle ] && [ -f AFRO_CITY_RP_Launcher_Source_Modified.zip ]; then
+            mkdir -p /tmp/afro-source
+            unzip -q AFRO_CITY_RP_Launcher_Source_Modified.zip -d /tmp/afro-source
+            cp -a /tmp/afro-source/AFRO_CITY_RP_Launcher/. .
+          fi
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
