@@ -27,11 +27,8 @@ jobs:
             mkdir -p /tmp/afro-source
             unzip -q AFRO_CITY_RP_Launcher_Source_Modified.zip -d /tmp/afro-source
             cp -a /tmp/afro-source/AFRO_CITY_RP_Launcher/. .
-            UI_FILE=app/src/main/java/ro/alynsampmobile/game/ui/UI.java
-            if [ -f "$UI_FILE" ]; then
-              sed -i '/import com\\.google\\.firebase\\.crashlytics\\.FirebaseCrashlytics;/d' "$UI_FILE"
-              sed -i '/FirebaseCrashlytics\.getInstance()\.setCrashlyticsCollectionEnabled(false);/d' "$UI_FILE"
-            fi
+            find app/src/main/java -name 'UI.java' -type f -exec sed -i '/FirebaseCrashlytics/d' {} \;
+          fi
           fi
 
       - name: Set up JDK 17
