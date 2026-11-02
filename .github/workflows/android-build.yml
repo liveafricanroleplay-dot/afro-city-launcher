@@ -29,7 +29,6 @@ jobs:
             cp -a /tmp/afro-source/AFRO_CITY_RP_Launcher/. .
             find app/src/main/java -name 'UI.java' -type f -exec sed -i '/FirebaseCrashlytics/d' {} \;
           fi
-          fi
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
